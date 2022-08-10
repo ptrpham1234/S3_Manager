@@ -1,16 +1,45 @@
-# This is a sample Python script.
+#!/usr/bin/env python3
+#############################################################################################################
+# Project Name:         S3_Manager
+# Author:               Peter Pham (pxp180041)
+# Date Started:         08/10/2022
+#
+# Description:
+#
+#############################################################################################################
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+################# I M P O R T S #################
+import os
+import re
+from cryptography.fernet import Fernet
 
 
+# setup the save directory
+basePath = r"".join(os.getcwd())  # get the current directory
+dataPath = r"".join(os.path.join(basePath, 'data'))
+
+
+#############################################################################################################
+#  * Function:            main
+#  * Author:              Peter Pham (pxp180041)
+#  * Date Started:        04/01/2022
+#  *
+#  * Description:
+#  * 
+#############################################################################################################
 def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    print(f'Hi, {name}')
 
 
-# Press the green button in the gutter to run the script.
+
+#############################################################################################################
+#  * Function:            main
+#  * Author:              Peter Pham (pxp180041)
+#  * Date Started:        04/01/2022
+#  *
+#  * Description:
+#  * Controls the flow of data process the home page and grabs all of the links related to birds. Then calls
+#  * the crawl functions that pull data from the birds page and collects more links to traverse
+#############################################################################################################
 if __name__ == '__main__':
     print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
