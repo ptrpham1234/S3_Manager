@@ -27,9 +27,20 @@ dataPath = r"".join(os.path.join(basePath, 'data'))
 #  * Description:
 #  * 
 #############################################################################################################
-def print_hi(name):
-    print(f'Hi, {name}')
+def main():
 
+    with open('filekey.key', 'rb') as key_file:
+        key = key_file.read()
+
+    fernet = Fernet(key)
+
+    with open('test.pdf', 'rb') as file:
+        original = file.read()
+
+    encrypted = fernet.encrypt(original)
+
+    with open('test_encrypted.pdf', 'wb') as encrypted_file:
+        encrypted_file.write(encrypted)
 
 
 #############################################################################################################
@@ -42,4 +53,4 @@ def print_hi(name):
 #  * the crawl functions that pull data from the birds page and collects more links to traverse
 #############################################################################################################
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    main()
