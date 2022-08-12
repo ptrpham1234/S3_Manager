@@ -133,4 +133,5 @@ dmypy.json
 
 *.key
 
-test_encrypted.pdf
+test_encrypted*
+decrypted_pdf*
