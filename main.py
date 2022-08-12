@@ -41,6 +41,8 @@ def main():
 
     with open('test_encrypted.pdf', 'wb') as encrypted_file:
         encrypted_file.write(encrypted)
+        
+    print("done")
 
 
 #############################################################################################################
