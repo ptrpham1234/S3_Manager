@@ -29,6 +29,7 @@ from exceptions import *
 # setup the save directory
 basePath = r"".join(os.getcwd())  # get the current directory
 dataPath = r"".join(os.path.join(basePath, 'data'))
+parentPath = r"".join(os.path.dirname(basePath))
 
 
 #############################################################################################################
@@ -42,7 +43,7 @@ dataPath = r"".join(os.path.join(basePath, 'data'))
 def main():
 
     # Try to open a key file. If there is no key file then generate one
-    key, access_key, secret_key = open_key("filekkey.key")
+    key, access_key, secret_key = open_key("filekey.key")
 
     fernet = Fernet(key)
 
@@ -74,15 +75,17 @@ def main():
 #############################################################################################################
 def open_key(file):
 
-    with open(file, 'r') as key_file:
+    # open the key file
+    with open(file, 'rb') as key_file:
         key = key_file.readline().strip()
         access_key = key_file.readline().strip()
         secret_key = key_file.readline().strip()
 
+        # if the key does not contain the access key and secret_key
         if (not access_key) and (not secret_key):
             raise IncorrectKey
 
-        return key, access_key, secret_key
+        return key, access_key.decode(), secret_key.decode()
 
 
 
@@ -118,8 +121,6 @@ def upload_file(file_name, bucket, access_key, secret_key, object_name=None):
     # If S3 object_name was not specified, use file_name
     if object_name is None:
         object_name = os.path.basename(file_name)
-
-    #! NEED TO IMPLEMENT BOTO3.SESSION()
 
     # Upload the file
     client = boto3.client('s3',
