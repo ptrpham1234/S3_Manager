@@ -14,12 +14,16 @@
 #############################################################################################################
 
 ################# I M P O R T S #################
+from http import client
 import os
+from queue import Empty
 import re
 from cryptography.fernet import Fernet
 from botocore.exceptions import ClientError
 import boto3
+import boto3.session
 import logging
+from exceptions import *
 
 
 # setup the save directory
@@ -38,14 +42,7 @@ dataPath = r"".join(os.path.join(basePath, 'data'))
 def main():
 
     # Try to open a key file. If there is no key file then generate one
-    try:
-        with open('filekey.key', 'rb') as key_file:
-            key = key_file.read()
-
-    except FileNotFoundError:
-        key = Fernet.generate_key()
-        with open('filekey.key', 'wb') as key_file:
-            key_file.write(key)
+    key, access_key, secret_key = open_key("filekkey.key")
 
     fernet = Fernet(key)
 
@@ -59,12 +56,34 @@ def main():
     with open('test_encrypted', 'wb') as encrypted_file:
         encrypted_file.write(encrypted)
 
-    upload_file('test_encrypted', 'test-128946561234', 'test_encrypted')
+    print(access_key)
 
-
+    upload_file('test_encrypted', 'test-123908471235', access_key, secret_key, 'test_encrypted')
 
 
     print("done")
+
+#############################################################################################################
+#  * Function:            main
+#  * Author:              Peter Pham (pxp180041)
+#  * Date Started:        08/12/2022
+#  *
+#  * Description:
+#  * Controls the flow of data process the home page and grabs all of the links related to birds. Then calls
+#  * the crawl functions that pull data from the birds page and collects more links to traverse
+#############################################################################################################
+def open_key(file):
+
+    with open(file, 'r') as key_file:
+        key = key_file.readline().strip()
+        access_key = key_file.readline().strip()
+        secret_key = key_file.readline().strip()
+
+        if (not access_key) and (not secret_key):
+            raise IncorrectKey
+
+        return key, access_key, secret_key
+
 
 
 #############################################################################################################
@@ -94,7 +113,7 @@ def decrypt_file(fernet):
 #  * Description:
 #  * Upload files to s3 bucket
 #############################################################################################################
-def upload_file(file_name, bucket, object_name=None):
+def upload_file(file_name, bucket, access_key, secret_key, object_name=None):
 
     # If S3 object_name was not specified, use file_name
     if object_name is None:
@@ -103,9 +122,20 @@ def upload_file(file_name, bucket, object_name=None):
     #! NEED TO IMPLEMENT BOTO3.SESSION()
 
     # Upload the file
-    s3_client = boto3.client('s3')
+    client = boto3.client('s3',
+                            aws_access_key_id = str(access_key),
+                            aws_secret_access_key = str(secret_key),
+                            region_name = 'us-east-1')
+
     try:
-        response = s3_client.upload_file(file_name, bucket, object_name)
+        # Fetch the list of existing buckets
+        clientResponse = client.list_buckets()
+    
+        # Print the bucket names one by one
+        print('Printing bucket names...')
+        for bucket in clientResponse['Buckets']:
+            print(f'Bucket Name: {bucket["Name"]}')
+
     except ClientError as e:
         logging.error(e)
         return False
