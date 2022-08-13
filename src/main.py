@@ -29,7 +29,7 @@ from exceptions import *
 # setup the save directory
 basePath = r"".join(os.getcwd())  # get the current directory
 dataPath = r"".join(os.path.join(basePath, 'data'))
-parentPath = r"".join(os.path.dirname(basePath))
+S3_Manager_Dir = r"".join(os.path.dirname(basePath))
 
 
 #############################################################################################################
