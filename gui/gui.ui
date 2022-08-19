@@ -6,125 +6,187 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1076</width>
-    <height>570</height>
+    <width>664</width>
+    <height>421</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTreeWidget" name="treeWidget">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>10</y>
-      <width>571</width>
-      <height>489</height>
-     </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="topMargin">
+     <number>16</number>
     </property>
-    <property name="autoExpandDelay">
-     <number>-1</number>
+    <property name="bottomMargin">
+     <number>16</number>
     </property>
-    <property name="uniformRowHeights">
-     <bool>true</bool>
+    <property name="spacing">
+     <number>15</number>
     </property>
-    <property name="animated">
-     <bool>true</bool>
-    </property>
-    <attribute name="headerCascadingSectionResizes">
-     <bool>true</bool>
-    </attribute>
-    <attribute name="headerMinimumSectionSize">
-     <number>98</number>
-    </attribute>
-    <attribute name="headerDefaultSectionSize">
-     <number>200</number>
-    </attribute>
-    <attribute name="headerHighlightSections">
-     <bool>true</bool>
-    </attribute>
-    <attribute name="headerShowSortIndicator" stdset="0">
-     <bool>true</bool>
-    </attribute>
-    <column>
-     <property name="text">
-      <string>Name</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Date Modified</string>
-     </property>
-    </column>
-    <item>
-     <property name="text">
-      <string>Folder1</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>SubFolder1</string>
+    <item row="0" column="1" rowspan="4">
+     <widget class="QTreeWidget" name="treeWidget">
+      <property name="minimumSize">
+       <size>
+        <width>539</width>
+        <height>334</height>
+       </size>
       </property>
-      <item>
+      <property name="autoExpandDelay">
+       <number>-1</number>
+      </property>
+      <property name="indentation">
+       <number>25</number>
+      </property>
+      <property name="uniformRowHeights">
+       <bool>true</bool>
+      </property>
+      <property name="animated">
+       <bool>true</bool>
+      </property>
+      <property name="headerHidden">
+       <bool>true</bool>
+      </property>
+      <attribute name="headerCascadingSectionResizes">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="headerMinimumSectionSize">
+       <number>98</number>
+      </attribute>
+      <attribute name="headerDefaultSectionSize">
+       <number>200</number>
+      </attribute>
+      <attribute name="headerHighlightSections">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="headerShowSortIndicator" stdset="0">
+       <bool>true</bool>
+      </attribute>
+      <column>
        <property name="text">
-        <string>Item1</string>
+        <string>Name</string>
        </property>
-      </item>
+      </column>
       <item>
        <property name="text">
-        <string>Item2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>SubFolder</string>
+        <string>Folder1</string>
        </property>
        <item>
         <property name="text">
-         <string>Item</string>
+         <string>SubFolder1</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Item1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Item2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>SubFolder</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Item</string>
+          </property>
+         </item>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>SubFolder2</string>
         </property>
        </item>
       </item>
-     </item>
-     <item>
-      <property name="text">
-       <string>SubFolder2</string>
-      </property>
-     </item>
-    </item>
-    <item>
-     <property name="text">
-      <string>Folder2</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>SubFolder3</string>
-      </property>
       <item>
        <property name="text">
-        <string>Item3</string>
+        <string>Folder2</string>
        </property>
+       <item>
+        <property name="text">
+         <string>SubFolder3</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Item3</string>
+         </property>
+        </item>
+       </item>
       </item>
-     </item>
+      <item>
+       <property name="text">
+        <string>Folder3</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Item3</string>
+        </property>
+       </item>
+      </item>
+     </widget>
     </item>
-    <item>
-     <property name="text">
-      <string>Folder3</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Item3</string>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="uploadButton">
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pick a file to upload to the S3 bucket&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
-     </item>
+      <property name="styleSheet">
+       <string notr="true">padding-right: 5px;
+padding-left: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+</string>
+      </property>
+      <property name="text">
+       <string>Upload Files</string>
+      </property>
+     </widget>
     </item>
-   </widget>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="downloadButton">
+      <property name="font">
+       <font>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">padding-right: 5px;
+padding-left: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+</string>
+      </property>
+      <property name="text">
+       <string>Download Files</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="refreshButton">
+      <property name="styleSheet">
+       <string notr="true">padding-right: 5px;
+padding-left: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+</string>
+      </property>
+      <property name="text">
+       <string>Refresh</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1076</width>
+     <width>664</width>
      <height>22</height>
     </rect>
    </property>

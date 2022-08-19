@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'gui.ui'
+# Form implementation generated from reading ui file '.\gui\gui.ui'
 #
 # Created by: PyQt6 UI code generator 6.3.1
 #
@@ -7,19 +7,49 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import *
+import os
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, files):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1076, 620)
+        MainWindow.resize(664, 421)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout.setContentsMargins(-1, 16, -1, 16)
+        self.gridLayout.setSpacing(15)
+        self.gridLayout.setObjectName("gridLayout")
         self.treeWidget = QtWidgets.QTreeWidget(self.centralwidget)
-        self.treeWidget.setGeometry(QtCore.QRect(400, 10, 571, 489))
+        self.treeWidget.setMinimumSize(QtCore.QSize(539, 334))
+        self.treeWidget.setAutoExpandDelay(-1)
+        self.treeWidget.setIndentation(25)
         self.treeWidget.setUniformRowHeights(True)
         self.treeWidget.setAnimated(True)
+        self.treeWidget.setHeaderHidden(True)
         self.treeWidget.setObjectName("treeWidget")
+
+
+        # top level nodes
+        for folder in files:
+            def make_tree(self, folder):  # folder here is a path to a folder
+                root = self.populate(folder)
+                self.tree_view.insertTopLevelItem(0, root)
+
+            def populate(self, path):
+                tree_item = QTreeWidgetItem()
+                tree_item.setText(0, os.path.basename(path))
+                for file in os.listdir(path):
+                    if os.path.isdir(os.path.join(path, file)):
+                        tree_item.addChild(self.populate(os.path.join(path, file)))
+                    else:
+                        sub_item = QTreeWidgetItem()
+                        sub_item .setText(0, file)
+                        tree_item.addChild(sub_item )
+                return tree_item
+
+
         item_0 = QtWidgets.QTreeWidgetItem(self.treeWidget)
         item_1 = QtWidgets.QTreeWidgetItem(item_0)
         item_2 = QtWidgets.QTreeWidgetItem(item_1)
@@ -32,11 +62,42 @@ class Ui_MainWindow(object):
         item_2 = QtWidgets.QTreeWidgetItem(item_1)
         item_0 = QtWidgets.QTreeWidgetItem(self.treeWidget)
         item_1 = QtWidgets.QTreeWidgetItem(item_0)
+        self.treeWidget.header().setCascadingSectionResizes(True)
         self.treeWidget.header().setDefaultSectionSize(200)
-        self.treeWidget.header().setMinimumSectionSize(100)
+        self.treeWidget.header().setHighlightSections(True)
+        self.treeWidget.header().setMinimumSectionSize(98)
+        self.treeWidget.header().setSortIndicatorShown(True)
+        self.gridLayout.addWidget(self.treeWidget, 0, 1, 4, 1)
+        self.uploadButton = QtWidgets.QPushButton(self.centralwidget)
+        self.uploadButton.setStyleSheet("padding-right: 5px;\n"
+"padding-left: 5px;\n"
+"padding-top: 5px;\n"
+"padding-bottom: 5px;\n"
+"")
+        self.uploadButton.setObjectName("uploadButton")
+        self.gridLayout.addWidget(self.uploadButton, 0, 0, 1, 1)
+        self.downloadButton = QtWidgets.QPushButton(self.centralwidget)
+        font = QtGui.QFont()
+        font.setBold(False)
+        self.downloadButton.setFont(font)
+        self.downloadButton.setStyleSheet("padding-right: 5px;\n"
+"padding-left: 5px;\n"
+"padding-top: 5px;\n"
+"padding-bottom: 5px;\n"
+"")
+        self.downloadButton.setObjectName("downloadButton")
+        self.gridLayout.addWidget(self.downloadButton, 1, 0, 1, 1)
+        self.refreshButton = QtWidgets.QPushButton(self.centralwidget)
+        self.refreshButton.setStyleSheet("padding-right: 5px;\n"
+"padding-left: 5px;\n"
+"padding-top: 5px;\n"
+"padding-bottom: 5px;\n"
+"")
+        self.refreshButton.setObjectName("refreshButton")
+        self.gridLayout.addWidget(self.refreshButton, 2, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1076, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 664, 22))
         self.menubar.setInputMethodHints(QtCore.Qt.InputMethodHint.ImhNone)
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
@@ -69,22 +130,13 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.treeWidget.headerItem().setText(0, _translate("MainWindow", "Name"))
-        self.treeWidget.headerItem().setText(1, _translate("MainWindow", "Date Modified"))
         __sortingEnabled = self.treeWidget.isSortingEnabled()
         self.treeWidget.setSortingEnabled(False)
-        self.treeWidget.topLevelItem(0).setText(0, _translate("MainWindow", "Folder1"))
-        self.treeWidget.topLevelItem(0).child(0).setText(0, _translate("MainWindow", "SubFolder1"))
-        self.treeWidget.topLevelItem(0).child(0).child(0).setText(0, _translate("MainWindow", "Item1"))
-        self.treeWidget.topLevelItem(0).child(0).child(1).setText(0, _translate("MainWindow", "Item2"))
-        self.treeWidget.topLevelItem(0).child(0).child(2).setText(0, _translate("MainWindow", "SubFolder"))
-        self.treeWidget.topLevelItem(0).child(0).child(2).child(0).setText(0, _translate("MainWindow", "Item"))
-        self.treeWidget.topLevelItem(0).child(1).setText(0, _translate("MainWindow", "SubFolder2"))
-        self.treeWidget.topLevelItem(1).setText(0, _translate("MainWindow", "Folder2"))
-        self.treeWidget.topLevelItem(1).child(0).setText(0, _translate("MainWindow", "SubFolder3"))
-        self.treeWidget.topLevelItem(1).child(0).child(0).setText(0, _translate("MainWindow", "Item3"))
-        self.treeWidget.topLevelItem(2).setText(0, _translate("MainWindow", "Folder3"))
-        self.treeWidget.topLevelItem(2).child(0).setText(0, _translate("MainWindow", "Item3"))
         self.treeWidget.setSortingEnabled(__sortingEnabled)
+        self.uploadButton.setToolTip(_translate("MainWindow", "<html><head/><body><p>Pick a file to upload to the S3 bucket</p></body></html>"))
+        self.uploadButton.setText(_translate("MainWindow", "Upload Files"))
+        self.downloadButton.setText(_translate("MainWindow", "Download Files"))
+        self.refreshButton.setText(_translate("MainWindow", "Refresh"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
